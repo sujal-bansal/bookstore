@@ -131,6 +131,7 @@ cd bookhub
 ```bash
 cd backend
 npm install
+node seeds/book.seed.js
 ```
 
 3. Set up environment variables
@@ -182,7 +183,7 @@ npm start
 
 ## Contributors
 
-- [Your Name](https://github.com/sujal-bansal)
+- [Sujal Bansal](https://github.com/sujal-bansal)
 
 ## License
 
