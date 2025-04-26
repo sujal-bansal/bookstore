@@ -123,18 +123,10 @@ _New user registration interface_
 
 ```bash
 git clone https://github.com/sujal-bansal/bookstore.git
-cd bookhub
+cd bookstore
 ```
 
-2. Install backend dependencies
-
-```bash
-cd backend
-npm install
-node seeds/book.seed.js
-```
-
-3. Set up environment variables
+2. Set up environment variables
    Create a `.env` file in the backend directory with the following variables:
 
 ```
@@ -142,6 +134,14 @@ PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 NODE_ENV=development
+```
+
+3. Install backend dependencies
+
+```bash
+cd backend
+npm install
+node seeds/book.seed.js
 ```
 
 4. Install frontend dependencies
@@ -165,7 +165,7 @@ npm start
 
 6. The application should now be running at:
 
-- Frontend: http://localhost:3000
+- Frontend: http://localhost:5173
 - Backend: http://localhost:5000
 
 ## Future Enhancements
