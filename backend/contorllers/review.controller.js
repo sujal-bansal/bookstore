@@ -33,6 +33,12 @@ export const postReview = async (req, res) => {
     const book = await Book.findById(bookId);
     if (!book) return res.status(404).json({ meesage: "Book not found" });
 
+    if (content.length < 10) {
+      return res
+        .status(400)
+        .json({ message: "Content must be at least 10 characters" });
+    }
+
     const existingReview = await Review.findOne({ book: bookId, user: userId });
     if (existingReview)
       return res
