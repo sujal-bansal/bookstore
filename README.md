@@ -25,6 +25,7 @@ BookStore is a comprehensive book review platform where users can browse books, 
 - Submit personal reviews for books
 - One review per user per book policy
 - Review listing sorted by most recent
+- **AI-Powered Review Enhancement** - Refine your reviews with Google Gemini AI assistance
 
 ### User Experience
 
@@ -63,6 +64,11 @@ _User login interface_
 ![Signup Page](./screenshots/signup.png)
 _New user registration interface_
 
+### AI Review Enhancement
+
+![AI Review Enhancement](./screenshots/ai-review.png)
+_AI-powered review refinement using Google Gemini_
+
 ## Tech Stack
 
 ### Frontend
@@ -82,6 +88,7 @@ _New user registration interface_
 - **Mongoose**: Object modeling tool for MongoDB
 - **bcryptjs**: For password hashing
 - **JWT**: For authentication tokens
+- **Google Gemini AI**: For AI-powered review enhancement
 
 ## API Endpoints
 
@@ -102,12 +109,31 @@ _New user registration interface_
 
 - `GET /api/reviews/:bookId` - Get all reviews for a specific book
 - `POST /api/reviews/:bookId` - Submit a new review for a book
+- `POST /api/reviews/refine/:bookId` - Refine a review using AI assistance
 
 ### Users
 
 - `GET /api/users/:id` - Get user profile information
 - `GET /api/users/me` - Get current user's profile
 - `PUT /api/users/profile` - Update user profile
+
+## AI-Powered Review Enhancement
+
+The platform integrates Google's Gemini AI to help users refine their book reviews. This feature:
+
+- Improves grammar, flow, and clarity of reviews
+- Maintains the original opinions and sentiment
+- Preserves the review's overall length
+- Provides a polished version that users can choose to use
+
+To use this feature:
+
+1. Write your initial review
+2. Click the "Enhance with AI" button
+3. Review the AI-suggested improvements
+4. Accept the enhanced version or keep your original
+
+This feature requires a valid Google Gemini API key to be set in the environment variables.
 
 ## Setup Instructions
 
@@ -116,6 +142,7 @@ _New user registration interface_
 - Node.js (v14 or later)
 - MongoDB (local installation or MongoDB Atlas account)
 - npm or yarn
+- Google Gemini API key (for AI review enhancement)
 
 ### Installation
 
@@ -134,6 +161,7 @@ PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_jwt_secret
 NODE_ENV=development
+GEMINI_API_KEY=your_google_gemini_api_key
 ```
 
 3. Install backend dependencies
@@ -174,7 +202,7 @@ npm start
 - Add social features (following users, commenting on reviews)
 - Enable book recommendations based on user preferences
 - Integrate with external book APIs for expanded catalog
-- Add LLM integration for AI-powered review refinement
+- Expand AI capabilities for book recommendations and content summarization
 
 ## Known Issues
 
