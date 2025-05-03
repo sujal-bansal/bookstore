@@ -6,11 +6,9 @@ dotenv.config();
 
 const HUGGING_FACE_API_TOKEN = process.env.HUGGING_FACE_API_TOKEN;
 
-// Using DeepSeek Coder model - smaller version that should load automatically
 const MODEL_URL =
   "https://api-inference.huggingface.co/models/deepseek-ai/deepseek-coder-1.3b-instruct";
 
-// Alternative DeepSeek models you can try:
 // https://api-inference.huggingface.co/models/deepseek-ai/deepseek-coder-1.3b-base;
 // - https://api-inference.huggingface.co/models/deepseek-ai/deepseek-coder-1.3b-instruct
 // - https://api-inference.huggingface.co/models/deepseek-ai/deepseek-math-7b-instruct
@@ -28,8 +26,6 @@ export const refineReview = async (req, res) => {
     if (!book) {
       return res.status(404).json({ message: "Book not found" });
     }
-
-    // Prompt for DeepSeek models
     const prompt = `You are a helpful assistant that improves book reviews.
     
 Original review: ${content}
@@ -65,8 +61,6 @@ Improved review:`;
       );
 
       console.log("Model response received:", response.data);
-
-      // Extract the generated text
       let refinedText = "";
 
       if (Array.isArray(response.data) && response.data.length > 0) {
@@ -82,13 +76,10 @@ Improved review:`;
       } else {
         refinedText = JSON.stringify(response.data);
       }
-
-      // Clean up the text
       refinedText = refinedText
         .replace(/^(Improved review:|Enhanced review:|Polished review:)/i, "")
         .trim();
 
-      // If the model output is too short or identical, return an error
       if (
         refinedText === content ||
         refinedText.length < content.length * 0.7
@@ -109,11 +100,9 @@ Improved review:`;
     } catch (error) {
       console.log("Error calling model API:", error);
 
-      // Provide more detailed error information
       let errorMessage = "Unable to refine review using the selected model";
       let errorDetails = error.message;
 
-      // Check for common Hugging Face API errors
       if (error.response) {
         console.log("Error response data:", error.response.data);
         console.log("Error response status:", error.response.status);

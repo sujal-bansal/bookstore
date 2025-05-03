@@ -17,7 +17,7 @@ export const useBookStore = create((set, get) => ({
   },
 
   getAllBooks: async (page = 1, limit = 10) => {
-    set({ isLoading: true });
+    set({ isLoading: true, books: [], filteredBooks: [] });
     try {
       const res = await api.get(`/books?page=${page}&limit=${limit}`);
       const booksData = res.data;
@@ -118,7 +118,7 @@ export const useBookStore = create((set, get) => ({
   },
 
   getSingleBook: async (bookId) => {
-    set({ isLoading: true });
+    set({ isLoading: true, books: [] });
     try {
       const res = await api.get(`/books/${bookId}`);
       set({ books: res.data });

@@ -11,6 +11,7 @@ export const useAuthStore = create((set) => ({
     try {
       const res = await api.get("/auth/check");
       set({ authUser: res.data });
+      console.log(res.data);
     } catch (error) {
       toast.error(error.response.data.message);
       set({ authUser: null });

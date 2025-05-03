@@ -55,7 +55,7 @@ function App() {
           <Route
             path="/adminOnly"
             element={
-              authUser && authUser.role === "admin" ? (
+              authUser && authUser.user?.role === "admin" ? (
                 <AddBookPage />
               ) : (
                 <Navigate to="/login" />

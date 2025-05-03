@@ -8,7 +8,7 @@ function AddBookPage() {
   const { postBook, isLoading } = useBookStore();
   const { authUser: user } = useAuthStore();
 
-  if (!user || user.role !== "admin") {
+  if (!user || user.user.role !== "admin") {
     return (
       <div className="py-6 text-center">
         <h1 className="text-2xl font-bold mb-4 text-white">Access Denied</h1>

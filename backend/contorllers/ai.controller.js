@@ -20,13 +20,8 @@ export const refineReview = async (req, res) => {
       return res.status(404).json({ message: "Book not found" });
     }
 
-    // Initialize the Google GenAI client
     const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
 
-    // Use the updated model name gemini-2.0-flash for a good balance of quality and speed
-    // You can change this to gemini-2.0-pro for higher quality but slower response
-
-    // Prompt for Gemini model
     const prompt = `You are an assistant that helps improve book reviews with light editing.
 
 Original book review: "${content}"
@@ -46,7 +41,6 @@ Do not add any prefix like "Enhanced review:" - just provide the improved text d
         maxOutputTokens: content.length * 3,
       };
 
-      // Using the updated API structure
       const response = await ai.models.generateContent({
         model: "gemini-2.0-flash",
         contents: prompt,
@@ -55,7 +49,6 @@ Do not add any prefix like "Enhanced review:" - just provide the improved text d
 
       console.log("Gemini response received");
 
-      // Extract the text from Gemini response
       let refinedText = response.text;
 
       if (!refinedText) {
@@ -63,7 +56,6 @@ Do not add any prefix like "Enhanced review:" - just provide the improved text d
         throw new Error("Empty response from Gemini API");
       }
 
-      // Clean up any potential prefixes that might appear despite instructions
       refinedText = refinedText
         .replace(
           /^(Improved review:|Enhanced review:|Polished review:|Here's the improved version:|Here is the enhanced review:)/i,
@@ -71,7 +63,6 @@ Do not add any prefix like "Enhanced review:" - just provide the improved text d
         )
         .trim();
 
-      // If the model output is too short or identical, return an error
       if (
         refinedText === content ||
         refinedText.length < content.length * 0.7
@@ -93,11 +84,9 @@ Do not add any prefix like "Enhanced review:" - just provide the improved text d
     } catch (error) {
       console.log("Error calling Gemini API:", error);
 
-      // Provide more detailed error information
       let errorMessage = "Unable to refine review using Google Gemini";
       let errorDetails = error.message;
 
-      // Handle specific API errors from the SDK
       if (error.status) {
         console.log("Error status:", error.status);
 

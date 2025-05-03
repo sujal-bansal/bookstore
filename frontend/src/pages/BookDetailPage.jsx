@@ -13,8 +13,12 @@ function BookDetailPage() {
   const { authUser } = useAuthStore();
 
   useEffect(() => {
-    getSingleBook(id);
-    getReview(id);
+    const fetchData = async () => {
+      await getSingleBook(id);
+      await getReview(id);
+    };
+    fetchData();
+    console.log(getReview);
   }, [id, getSingleBook, getReview]);
 
   const book = books;
@@ -53,7 +57,8 @@ function BookDetailPage() {
               <div className="text-sm text-gray-400">
                 <p>Publisher: {book.publisher}</p>
                 <p>Publication Year: {book.publicationYear}</p>
-                <p>Reviews: {book.reviewCount || 0}</p>
+                <p>No of Reviews: {book.reviewCount || 0}</p>
+                <p>No of Rating: {book.ratingCount || "Never Rated"}</p>
               </div>
             </div>
           </div>

@@ -16,6 +16,7 @@ function ReviewItem({ review }) {
         <span className="text-xs text-gray-400">{date}</span>
       </div>
       <p className="mt-2 text-gray-300">{review.content}</p>
+      <p className="mt-2 text-gray-300">Rating : {review.rating}</p>
     </div>
   );
 }

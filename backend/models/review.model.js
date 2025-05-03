@@ -17,6 +17,10 @@ const reviewSchema = new mongoose.Schema(
       required: true,
       minlength: 10,
     },
+    rating: {
+      type: Number,
+      required: true,
+    },
   },
   {
     timestamps: true,
