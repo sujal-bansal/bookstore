@@ -65,6 +65,7 @@ function ReviewForm({ bookId }) {
             onChange={(e) => setContent(e.target.value)}
             required
           ></textarea>
+          <label>Rating : </label>
           <input
             type="number"
             placeholder="Give Rating for the book"
